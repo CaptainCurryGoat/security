@@ -2,6 +2,8 @@ import parser, sys, datetime, time
 from socket import *
 
 #Create socket object
+maxPort=7000
+minPort=1
 
 def _con_target_(host, port):
     try:
@@ -28,3 +30,5 @@ def _scan_target(host, port):
     except:
         print("ERROR. Unknown host ", host)
 
+
+def main():
