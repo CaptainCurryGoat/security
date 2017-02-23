@@ -1,0 +1,72 @@
+GIT COMMANDS
+------------
+Most of my notes originated from 'Git Essential Training' from lynda.com
+
+Track your Repository
+---------------------
+Navigate to your root project folder and execute the following.
+	git init
+This will track all the files created in this directory.
+
+
+Add changes to entire project directory
+---------------------------------------
+If you're in the directory where you're 
+mkaing changes, execute the follwing..
+	git add .
+
+Commit changes
+--------------
+Committing a change will save the file
+in memory.
+	git commit -m "Initial commit"
+
+View commit log
+---------------
+git log
+
+To limit the number of commits returned
+	git log -n 1 <- Tells git to return only 1 commit.
+
+Specify gits by date
+	git log --since=2017-02-24
+
+To view commits by author only
+
+CONFIGURE GIT
+-------------
+To make changes at the user level, use the keyword global.
+Now set your name and email to the .github file (ls -la in your users dir)
+git config --global user.name "Daniel Edwards"
+git config --global user.email "myemail@gmail.com"
+
+You can also set the editor you like to use
+git config --global core.editor "nano -wl1".
+w - will tell nano to wait.
+l1 - tells nano to start at line 1.
+
+REMOVING/DELETING FILES
+-----------------------
+Dragging and dropping your files into the trash can
+will not completly remove it from the repo. Running
+git status will show the "Changes not staged for commit" message.
+
+Use the following command to remove it completly.
+	git rm file
+
+Running git status will show the "Changes to be committed message".
+
+
+MOVING AND RENAMING FILES
+-------------------------
+Renaming a file can trick git into thinking the file was deleted.
+It will see the new file and return an "Untracked files" message.
+
+Add the changes to the staging index by adding the new name of the
+text file and removing the name of the old file.
+	git add new_file
+	git rm old_file
+Running git status again will show that git recognizes that the
+file name was changed.
+
+

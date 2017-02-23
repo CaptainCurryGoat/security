@@ -1,4 +1,4 @@
-import parser, sys, datetime, time
+import argparse, sys, datetime, time
 from socket import *
 
 #Create socket object
@@ -32,3 +32,6 @@ def _scan_target(host, port):
 
 
 def main():
+    parser = argparse.ArgumentParser('usage -h <target host> -p <target port>')
+    parser.add_argument('-H', dest='tgtHost', type='string', help='specify target host')
+    parser.add_argument('-H', dest='tgtHost', type='string', help='specify target port[s] separated by commas')
