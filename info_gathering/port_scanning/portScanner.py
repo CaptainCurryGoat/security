@@ -35,3 +35,9 @@ def main():
     parser = argparse.ArgumentParser('usage -h <target host> -p <target port>')
     parser.add_argument('-H', dest='tgtHost', type='string', help='specify target host')
     parser.add_argument('-H', dest='tgtHost', type='string', help='specify target port[s] separated by commas')
+
+    for port in range(minPort, maxPort):
+        try:
+
+        except Exception e:
+            pass
