@@ -33,11 +33,12 @@ def _scan_target(host, port):
 
 def main():
     parser = argparse.ArgumentParser('usage -h <target host> -p <target port>')
-    parser.add_argument('-H', dest='tgtHost', type='string', help='specify target host')
-    parser.add_argument('-H', dest='tgtHost', type='string', help='specify target port[s] separated by commas')
+    parser.add_argument('-h', dest='tgtPort', type='string', help='specify target host')
+    parser.add_argument('-p', dest='tgtHost', type='string', help='specify target port[s] separated by commas')
+    parser.add_argument('-w', dest='file',    type='string', help='specify the file to be written to')
 
     for port in range(minPort, maxPort):
         try:
-
+                response = _scan_target()
         except Exception e:
             pass

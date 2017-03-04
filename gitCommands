@@ -64,9 +64,71 @@ It will see the new file and return an "Untracked files" message.
 
 Add the changes to the staging index by adding the new name of the
 text file and removing the name of the old file.
-	git add new_file
-	git rm old_file
+	git add new_file_name
+	git rm old_file_name
 Running git status again will show that git recognizes that the
 file name was changed.
 
 
+SHOW DIFFERENCES BETWEEN FILES
+------------------------------
+To compare the differences between two files type the following..
+	git diff file_name
+
+To only show the changes that were made instead of the entire file..
+	git diff --color-words file_name
+
+
+COMMIT AND ADD FILES
+--------------------
+You can add files to the staging index and commit
+at the same time. This grabs everything in your working directory.
+Files that are not tracked or being deleted will not get added.
+	git commit -am "message"
+
+
+
+
+
+
+
+
+CHAPTER 7 UNDOING CHANGES
+-------------------------
+
+1) Undoing working directory changes
+   	To undo an accidental or purposeful delete/edit to a file(s) use the git checkout 
+   	command followed by the name of the file. 
+		git checkout file_name.
+	
+   	The above command will make changes to the entire branch. To specifiy just the file
+   	name....
+		git checkout -- file_name
+
+2) Unstaging Files
+   	You stage a file whenever you add it (git add file_name). You would unstage a file
+   	if you were to accidentally add it.
+  		git reset HEAD file_name
+
+3) Amending Commits
+   	You can only change the last commit as nothing depends on it. Use the ammend option.
+		git commit --ammend -m "write your message here"
+
+	You can also change the last message in your commit with the ammend option.
+		git commit --ammend -m "write all of your messages here".
+
+4) Retrieving Old Versions
+	Type git log to display the SHA ID. Copy either the second hash ID or a part of it. Type
+	'git checkout' and paste the portion of the copied hash ID.	
+		git checkout csdkj2834923y489lm12 -- file_name
+	
+	Now type git diff --staged to compare the old and new versions. The items in red are the 
+	current version, the items at the bottom are the older versions. 
+
+	Commit the changes to revert back to the previous version.
+
+5) Reverting a commit
+	Undo the changes to a commit. Using the revert command, it will do the opposite of your changes.
+	Anything that was added, will be deleted and vice versa. Grab a part of the hash ID paste after 
+	the following...
+		git revert 81sdfh8@&!12klf 
