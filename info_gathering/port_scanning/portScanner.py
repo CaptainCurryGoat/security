@@ -5,7 +5,7 @@ from socket import *
 maxPort=7000
 minPort=1
 
-def _con_target_(host, port):
+def _con_scan(host, port):
     try:
         sock = socket(AF_INET, socket.SOCK_STREAM)
         sock = socket.connect(host, port)
@@ -21,6 +21,8 @@ def _con_target_(host, port):
 
 #After connecting to target, scan target.
 def _scan_target(host, port):
+
+    _con_scan(host, port)
     try:
         host_ip = gethostbyname(host) #takes host name, returns host ip
         print("Host: ", host_ip, "\n")
@@ -48,7 +50,13 @@ def main():
 
     for port in range(minPort, maxPort):
         try:
-                result = _scan_target(tgtHost, tgtPorts)
+            result = _scan_target(tgtHost, tgtPorts)
 
-        except Exception e:
+            if result == 0:
+                print("[*] Port %d: Open" % (tgtPorts[port]))
+
+        except:
             pass
+
+
+if __name__ == '__main__':
