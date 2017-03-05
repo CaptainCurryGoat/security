@@ -42,7 +42,10 @@ def main():
     tgtHost = options.tgtHost
     tgtPorts = str(options.tgtPort).split(',')
 
-    
+    if (tgtHost == None) | (tgtPorts[0] == None):
+        print(parser.usage)
+    exit(0)
+
     for port in range(minPort, maxPort):
         try:
                 result = _scan_target(tgtHost, tgtPorts)
