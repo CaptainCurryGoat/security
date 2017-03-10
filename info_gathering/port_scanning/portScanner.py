@@ -35,14 +35,14 @@ def _scan_target(host, port):
 
 def main():
     parser = argparse.ArgumentParser('usage -h <target host> -p <target port>')
-    parser.add_argument('-h', dest='tgtPort', type='string', help='specify target host')
-    parser.add_argument('-p', dest='tgtHost', type='string', help='specify target port[s] separated by commas')
+    parser.add_argument('-H', dest='tgtPort', required=True, type=str, help='specify target host')
+    parser.add_argument('-p', dest='tgtHost', required=True, type=str, help='specify target port[s] separated by commas')
     #parser.add_argument('-w', dest='file',    type='string', help='specify the file to be written to')
 
     # Gets the target host and target port
-    (options, args) = parser.parse_args()
-    tgtHost = options.tgtHost
-    tgtPorts = str(options.tgtPort).split(',')
+    args = parser.parse_args()
+    tgtHost = args.tgtHost
+    tgtPorts = str(args.tgtPort).split(',')
 
     if (tgtHost == None) | (tgtPorts[0] == None):
         print(parser.usage)
@@ -60,3 +60,4 @@ def main():
 
 
 if __name__ == '__main__':
+    main()
