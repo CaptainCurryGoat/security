@@ -27,7 +27,7 @@ def _con_scan(host, port):
         sock.close()
 
 #After connecting to target, scan target.
-def _scan_target(host, port):
+def _scan_port(host, port):
 
     _con_scan(host, port)
     try:
@@ -56,7 +56,7 @@ def main():
 
     for port in range(minPort, maxPort):
         try:
-            result = _scan_target(tgtHost, tgtPorts)
+            result = _scan_port(tgtHost, tgtPorts)
 
             if result == 0:
                 print("[*] Port %d: Open" % (tgtPorts[port]))
