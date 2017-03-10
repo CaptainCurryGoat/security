@@ -27,8 +27,17 @@ def port_range(host, min, max):
         print("")
 
 #This menu will be displayed to the user.
-scan_menu={'selected': specific_ports(),
+def display_menu(select):
+    scan_menu={'selected': specific_ports(),
            'range':port_range()}
+
+    print("Choose a port scan type\n_____________________\n")
+    print("1) Targeted Ports: Specify the ports you want to scan\n 2) Scan a range of ports")
+
+    if select == 1:
+        dict['selected']
+    elif select == 2:
+        dict['range']
 
 def _con_scan(host, port):
     try:
