@@ -1,4 +1,4 @@
-import argparse, sys, datetime, time
+import argparse, sys, datetime, time, re
 from socket import *
 
 #Create socket object
@@ -7,11 +7,18 @@ minPort=1
 
 def _con_scan(host, port):
     try:
-        sock = socket(AF_INET, socket.SOCK_STREAM)
-        sock = socket.connect(host, port)
-        results = sock.recv(1024); #Receive no more than 1024 bytes
 
-        print("TCP Port: ", port, " open")
+        test_ip=re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", host)
+
+        while test_ip:
+            global sock
+            sock = socket(AF_INET, socket.SOCK_STREAM)
+            sock = socket.connect(host, port)
+            results = sock.recv(1024); #Receive no more than 1024 bytes
+
+            print("TCP Port: ", port, " open")
+        else:
+            print("INVALID FORMAT ERROR: Please enter the ip address in the 0.0.0.0 format ")
 
     except:
         print("TCP Port: ", port, "closed")
@@ -37,9 +44,8 @@ def main():
     parser = argparse.ArgumentParser('usage -h <target host> -p <target port>')
     parser.add_argument('-H', dest='tgtPort', required=True, type=str, help='specify target host')
     parser.add_argument('-p', dest='tgtHost', required=True, type=str, help='specify target port[s] separated by commas')
-    #parser.add_argument('-w', dest='file',    type='string', help='specify the file to be written to')
 
-    # Gets the target host and target port
+    #Gets the target host and target port
     args = parser.parse_args()
     tgtHost = args.tgtHost
     tgtPorts = str(args.tgtPort).split(',')
