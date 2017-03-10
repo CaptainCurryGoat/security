@@ -5,20 +5,46 @@ from socket import *
 maxPort=7000
 minPort=1
 
+#The following methods give you two options:
+#specific_ports scan selected ports
+#port_range to scan a range of ports
+#These will be called using a dictionary as a menu for the user.
+
+
+#Specify ports
+def specific_ports(host, port):
+
+    try:
+        print("")
+    except:
+        print("")
+
+#Scan a range of ports
+def port_range(host, min, max):
+    try:
+        print("")
+    except:
+        print("")
+
+#This menu will be displayed to the user.
+scan_menu={'selected': specific_ports(),
+           'range':port_range()}
+
 def _con_scan(host, port):
     try:
 
         test_ip=re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", host)
 
-        while test_ip:
-            global sock
-            sock = socket(AF_INET, socket.SOCK_STREAM)
-            sock = socket.connect(host, port)
-            results = sock.recv(1024); #Receive no more than 1024 bytes
+        while True:
+            if test_ip:
+                global sock
+                sock = socket(AF_INET, socket.SOCK_STREAM)
+                sock = socket.connect(host, port)
+                results = sock.recv(1024); #Receive no more than 1024 bytes
 
-            print("TCP Port: ", port, " open")
+                print("TCP Port: ", port, " open")
         else:
-            print("INVALID FORMAT ERROR: Please enter the ip address in the 0.0.0.0 format ")
+            print("\nINVALID FORMAT ERROR: Please enter the ip address in the 0.0.0.0 format: ")
 
     except:
         print("TCP Port: ", port, "closed")
@@ -50,10 +76,7 @@ def main():
     tgtHost = args.tgtHost
     tgtPorts = str(args.tgtPort).split(',')
 
-    if (tgtHost == None) | (tgtPorts[0] == None):
-        print(parser.usage)
-    exit(0)
-
+   #Loop through the port range
     for port in range(minPort, maxPort):
         try:
             result = _scan_port(tgtHost, tgtPorts)
@@ -64,6 +87,8 @@ def main():
         except:
             pass
 
-
+    if (tgtHost == None) | (tgtPorts[0] == None):
+        print(parser.usage)
+    exit(0)
 if __name__ == '__main__':
     main()
