@@ -2,42 +2,10 @@ import argparse, sys, datetime, time, re
 from socket import *
 
 #Create socket object
+global maxPort, minPort
 maxPort=7000
 minPort=1
 
-#The following methods give you two options:
-#specific_ports scan selected ports
-#port_range to scan a range of ports
-#These will be called using a dictionary as a menu for the user.
-
-
-#Specify ports
-def specific_ports(host, port):
-
-    try:
-        print("")
-    except:
-        print("")
-
-#Scan a range of ports
-def port_range(host, min, max):
-    try:
-        print("")
-    except:
-        print("")
-
-#This menu will be displayed to the user.
-def display_menu(select):
-    scan_menu={'selected': specific_ports(),
-           'range':port_range()}
-
-    print("Choose a port scan type\n_____________________\n")
-    print("1) Targeted Ports: Specify the ports you want to scan\n 2) Scan a range of ports")
-
-    if select == 1:
-        dict['selected']
-    elif select == 2:
-        dict['range']
 
 def _con_scan(host, port):
     try:

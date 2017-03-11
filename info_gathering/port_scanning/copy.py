@@ -52,8 +52,8 @@ def _con_scan(host, port):
                 results = sock.recv(1024); #Receive no more than 1024 bytes
 
                 print("TCP Port: ", port, " open")
-        else:
-            print("\nINVALID FORMAT ERROR: Please enter the ip address in the 0.0.0.0 format: ")
+            else:
+                print("\nINVALID FORMAT ERROR: Please enter the ip address in the 0.0.0.0 format: ")
 
     except:
         print("TCP Port: ", port, "closed")
