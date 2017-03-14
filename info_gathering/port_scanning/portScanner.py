@@ -8,20 +8,15 @@ minPort=1
 
 
 def _con_scan(host, port):
+    print("BUT I CAN'T SEE YOU!!")
     try:
+        #global sock
+        sock = socket(AF_INET, socket.SOCK_STREAM)
+        sock = socket.connect(host, port)
+        results = sock.recv(1024); #Receive no more than 1024 bytes
 
-        test_ip=re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", host)
-
-        while True:
-            if test_ip:
-                global sock
-                sock = socket(AF_INET, socket.SOCK_STREAM)
-                sock = socket.connect(host, port)
-                results = sock.recv(1024); #Receive no more than 1024 bytes
-
-                print("TCP Port: ", port, " open")
-        else:
-            print("\nINVALID FORMAT ERROR: Please enter the ip address in the 0.0.0.0 format: ")
+        print("TCP Port: ", port, " open")
+        print(str(results))
 
     except:
         print("TCP Port: ", port, "closed")
@@ -31,7 +26,7 @@ def _con_scan(host, port):
 
 #After connecting to target, scan target.
 def _scan_port(host, port):
-
+    print("IDK IF THAT'S YOU!!!!")
     _con_scan(host, port)
     try:
         host_ip = gethostbyname(host) #takes host name, returns host ip
@@ -44,6 +39,7 @@ def _scan_port(host, port):
 
 
 def main():
+    print("CAN YOU SEE ME???")
     parser = argparse.ArgumentParser('usage -h <target host> -p <target port>')
     parser.add_argument('-H', dest='tgtPort', required=True, type=str, help='specify target host')
     parser.add_argument('-p', dest='tgtHost', required=True, type=str, help='specify target port[s] separated by commas')
@@ -52,17 +48,8 @@ def main():
     args = parser.parse_args()
     tgtHost = args.tgtHost
     tgtPorts = str(args.tgtPort).split(',')
+    _scan_port(tgtHost, tgtPorts)
 
-   #Loop through the port range
-    for port in range(minPort, maxPort):
-        try:
-            result = _scan_port(tgtHost, tgtPorts)
-
-            if result == 0:
-                print("[*] Port %d: Open" % (tgtPorts[port]))
-
-        except:
-            pass
 
     if (tgtHost == None) | (tgtPorts[0] == None):
         print(parser.usage)
