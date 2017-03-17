@@ -1,40 +1,40 @@
-import argparse, sys, datetime, time, re
-from socket import *
+import argparse, sys, datetime, time, re, socket
+#from socket import *
 
-def _con_scan(host, port):
+#global socket
+
+def con_scan(host, port):
 
     try:
-        #global sock
-        sock = socket(AF_INET, SOCK_STREAM)
-        sock.connect(host, port)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect_ex((host, port))
         sock.send('ViolentPython\r\n')
-        results = sock.recv(100); #Receive no more than 1024 bytes
-        print("$ TCP Port: " + port + " open")
-        print(results)
+        results = sock.recv()
+        print('$ TCP Port: ' + port + ' open')
+        print('$ ' + results)
     except:
-        print("$ TCP Port: "  + port + " closed\n")
+        print('$ TCP Port: '  + port + ' closed\n')
     finally:
         sock.close()
 
 #After connecting to target, scan target.
-def _scan_port(host, ports):
+def scan_port(host, ports):
     try:
-        host_ip = gethostbyname(host) #takes host name, returns host ip
+        host_ip = socket.gethostbyname(host) #takes host name, returns host ip
         print("$ Scan initiated @ " + time.strftime("%H:%M:%S") + "\n_______________________________")
-        #d = date.fromordinal(730920)  # 730920th day after 1. 1. 0001
 
     except:
         print("ERROR. Unknown host " + host_ip)
 
     try:
-        hostname=gethostbyaddr(host_ip)
+        hostname=socket.gethostbyaddr(host_ip)
         print("\n$ Hostname Results: " + hostname)
     except:
         print("\n$ IP Results: " + host_ip)
 
     for port in ports:
         print("\n$ Scanning Port: " + port)
-        _con_scan(host_ip,port)
+        con_scan(host,port)
 
 
 def main():
@@ -46,7 +46,7 @@ def main():
     args = parser.parse_args()
     tgtHost = args.tgtHost
     tgtPorts = str(args.tgtPort).split(',')
-    _scan_port(tgtHost, tgtPorts)
+    scan_port(tgtHost, tgtPorts)
 
     if tgtHost is None or tgtPorts[0] is None:
         print(parser.usage)
