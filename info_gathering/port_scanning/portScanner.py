@@ -45,7 +45,6 @@ def main():
         parser.add_argument('-H', dest='tgtHost', required=True, type=str, help='specify target host')
         parser.add_argument('-p', dest='tgtPort', required=True, type=str)
 
-
         #Gets the target host and target port
         global tgtHost, tgtPorts
         args = parser.parse_args()
@@ -55,7 +54,7 @@ def main():
         while True:
             #global ip
             #tgtHost = input("Enter IP Address: ")
-            if re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", tgtHost): #Validates correct format.
+            """if re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", tgtHost): #Validates correct format.
                 octet = tgtHost.split(".")  # Split each octet by the period.
                 if 1<= int(octet[0]) <= 223 and int(octet[0]) != 127:
                     if int(octet[0]) != 169 or int(octet[0]) != 254:
@@ -70,7 +69,7 @@ def main():
                     print("First octet must be between 1 and 223 and cannot equal 127.")
             else:
                 print("INVALID FORMAT ERROR. Please enter IP Address in correct format." )
-                tgtHost = input("Enter IP Address: ")
+                tgtHost = input("Enter IP Address: ")"""
 
         scan_port(tgtHost, tgtPorts)
     except:
